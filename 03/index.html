@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Tools Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Business Tools Dashboard</h1>
+    </header>
+
+    <main class="main-container">
+        <section class="tool-section">
+            <h2>Market Analysis</h2>
+            <button id="marketAnalysisButton">Generate Analysis</button>
+            <div id="marketAnalysisResults" class="results"></div>
+        </section>
+
+        <section class="tool-section">
+            <h2>Funding Suggestions</h2>
+            <button id="fundingSuggestionsButton">Get Suggestions</button>
+            <div id="fundingSuggestionsResults" class="results"></div>
+        </section>
+
+        <section class="tool-section">
+            <h2>Regional Growth Analytics</h2>
+            <input type="text" id="regionInput" placeholder="Enter region name">
+            <button id="regionalGrowthButton">Analyze Growth</button>
+            <div id="regionalGrowthResults" class="results"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Business Tools Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+heroku config:set VAR_NAME=value

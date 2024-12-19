@@ -1,0 +1,8 @@
+database_management/
+├── app.py
+├── templates/
+│   └── index.html
+├── static/
+│   ├── styles.css
+│   └── script.js
+└── database.db

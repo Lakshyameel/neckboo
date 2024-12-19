@@ -1,0 +1,1 @@
+scp -i your-key.pem -r /path/to/your/project ubuntu@your-ec2-public-ip:/home/ubuntu/
