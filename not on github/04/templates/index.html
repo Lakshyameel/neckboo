@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Database Management</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Chatbot Database Management</h1>
+    </header>
+
+    <main>
+        <section class="query-section">
+            <h2>Ask a Question</h2>
+            <textarea id="queryInput" placeholder="Type your question here..."></textarea>
+            <button id="submitQuery">Submit</button>
+        </section>
+
+        <section class="response-section">
+            <h2>Response</h2>
+            <div id="responseOutput"></div>
+        </section>
+
+        <section class="history-section">
+            <h2>Chat History</h2>
+            <button id="loadHistory">Load History</button>
+            <div id="historyOutput"></div>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Roadmap</title>
+</head>
+<body>
+    <h1>Business Roadmap</h1>
+    <p><strong>Industry:</strong> {{ industry }}</p>
+    <p><strong>Target Audience:</strong> {{ target_audience }}</p>
+    <h2>Roadmap Details:</h2>
+    <h3>Product Development Phases:</h3>
+    <ul>
+        {% for phase in roadmap['Product Development'] %}
+            <li>{{ phase }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Marketing Milestones:</h3>
+    <ul>
+        {% for milestone in roadmap['Marketing Milestones'] %}
+            <li>{{ milestone }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Financial Forecasting:</h3>
+    <ul>
+        {% for quarter, amount in roadmap['Financial Forecasting'].items() %}
+            <li>{{ quarter }}: ${{ amount }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

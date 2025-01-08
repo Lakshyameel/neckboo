@@ -1,0 +1,85 @@
+from flask import Flask, render_template, request, jsonify
+import openai  # For AI Chatbot
+from sqlalchemy import create_engine, Column, Integer, String, Float
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+app = Flask(__name__)
+
+# Configure OpenAI API
+openai.api_key = "your_openai_api_key"
+
+# Database Configuration
+DATABASE_URL = "sqlite:///business.db"  # Example: Use PostgreSQL or MongoDB for production
+Base = declarative_base()
+engine = create_engine(DATABASE_URL)
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Define Database Models
+class UserQuery(Base):
+    __tablename__ = 'user_queries'
+    id = Column(Integer, primary_key=True)
+    query = Column(String, nullable=False)
+    response = Column(String, nullable=False)
+
+Base.metadata.create_all(engine)
+
+# Routes
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/generate-roadmap", methods=["POST"])
+def generate_roadmap():
+    industry = request.form.get("industry")
+    target_audience = request.form.get("target_audience")
+    budget = float(request.form.get("budget"))
+
+    # Generate a simple roadmap (expand logic as needed)
+    roadmap = {
+        "Product Development": [
+            "Research and Planning",
+            "Prototype Creation",
+            "User Testing",
+            "Final Product Launch"
+        ],
+        "Marketing Milestones": [
+            "Social Media Campaigns",
+            "Google Ads Implementation",
+            "SEO Optimization"
+        ],
+        "Financial Forecasting": {
+            "Q1": budget * 0.25,
+            "Q2": budget * 0.30,
+            "Q3": budget * 0.20,
+            "Q4": budget * 0.25
+        }
+    }
+
+    return render_template("roadmap.html", industry=industry, target_audience=target_audience, roadmap=roadmap)
+
+@app.route("/ai-chatbot", methods=["POST"])
+def ai_chatbot():
+    query = request.form.get("query")
+
+    # OpenAI API integration
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": query}]
+    )
+
+    chatbot_response = response.choices[0].message['content']
+
+    # Save to database
+    user_query = UserQuery(query=query, response=chatbot_response)
+    session.add(user_query)
+    session.commit()
+
+    return jsonify({"query": query, "response": chatbot_response})
+
+# Add more routes for other features like market analysis, share market guidance, etc.
+
+if __name__ == "__main__":
+    app.run(debug=True)

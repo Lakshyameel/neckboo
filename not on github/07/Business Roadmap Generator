@@ -1,0 +1,50 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/generate-roadmap', methods=['POST'])
+def generate_roadmap():
+    # Collect user inputs
+    industry = request.form['industry']
+    target_audience = request.form['target_audience']
+    budget = float(request.form['budget'])
+
+    # Generate product development phases
+    product_phases = [
+        "Market research and validation",
+        "Prototype development",
+        "Testing and feedback",
+        "Final product release"
+    ]
+
+    # Generate marketing milestones
+    marketing_milestones = [
+        "Create a marketing strategy",
+        "Launch social media campaigns",
+        "Run targeted advertisements",
+        "Evaluate customer engagement"
+    ]
+
+    # Generate financial forecasting
+    financial_forecast = {
+        "Q1": budget * 0.25,
+        "Q2": budget * 0.35,
+        "Q3": budget * 0.25,
+        "Q4": budget * 0.15
+    }
+
+    # Compile roadmap
+    roadmap = {
+        "Product Development": product_phases,
+        "Marketing Milestones": marketing_milestones,
+        "Financial Forecasting": financial_forecast
+    }
+
+    return render_template('roadmap.html', industry=industry, target_audience=target_audience, roadmap=roadmap)
+
+if __name__ == '__main__':
+    app.run(debug=True)
